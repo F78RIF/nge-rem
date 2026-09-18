@@ -15,6 +15,17 @@ npm run build && npm run start
 
 - `/` — placeholder beranda (landing page lengkap menyusul)
 - `/ui-kit` — katalog design token & komponen UI (noindex)
+- `/skenario` — assessment engine: skenario 10 detik → feedback → ringkasan (Bab 8, 9, 16)
+
+## Database (migrasi)
+
+Jalankan file di `supabase/migrations/` secara berurutan di **Supabase → SQL Editor** (aman dijalankan ulang).
+`20260918000000_assessment_engine.sql` membuat tabel scenario/choices/attempt/`scenario_responses`, mengunci
+semuanya dengan RLS (akses hanya via server), dan mengisi 10 scenario MVP (set `baseline-demo`).
+
+API assessment (`/api/v1`, Bab 28–29): `POST assessments/:slug/attempts` (mulai/lanjutkan),
+`POST attempts/:id/responses` (jawaban atau TIMEOUT, idempoten per `client_event_id`),
+`POST attempts/:id/complete`. Sebelum login tersedia, attempt diikat ke cookie httpOnly `ngerem_sid`.
 
 ## Environment & Supabase
 

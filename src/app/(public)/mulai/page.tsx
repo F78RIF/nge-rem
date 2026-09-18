@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, Building2, User } from "lucide-react";
-import { Alert, Container } from "@/components/ui";
+import { ArrowLeft, ArrowRight, Building2, Play, User } from "lucide-react";
+import { Alert, ButtonLink, Container } from "@/components/ui";
 
 export const metadata: Metadata = { title: "Mulai" };
 
@@ -34,6 +34,10 @@ export default function MulaiPage() {
         <Alert tone="warning" title="Pendaftaran segera dibuka">
           Program pilot sedang disiapkan. Pendaftaran peserta akan aktif dalam waktu dekat.
         </Alert>
+
+        <ButtonLink href="/skenario" variant="safety" size="lg" fullWidth>
+          <Play className="size-5" aria-hidden /> Coba Demo Skenario
+        </ButtonLink>
 
         <ul className="flex flex-col gap-3">
           {OPTIONS.map(({ icon: Icon, title, body }) => (

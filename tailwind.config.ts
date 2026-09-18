@@ -77,9 +77,31 @@ const config: Config = {
           from: { opacity: "0", transform: "translateY(8px)" },
           to: { opacity: "1", transform: "translateY(0)" },
         },
+        // Transisi layar assessment: masuk dari kanan, keluar ke kiri.
+        "slide-in": {
+          from: { opacity: "0", transform: "translateX(28px)" },
+          to: { opacity: "1", transform: "translateX(0)" },
+        },
+        "slide-out": {
+          from: { opacity: "1", transform: "translateX(0)" },
+          to: { opacity: "0", transform: "translateX(-28px)" },
+        },
+        pop: {
+          "0%": { opacity: "0", transform: "scale(0.6)" },
+          "60%": { opacity: "1", transform: "scale(1.08)" },
+          "100%": { opacity: "1", transform: "scale(1)" },
+        },
+        "pulse-urgent": {
+          "0%, 100%": { transform: "scale(1)" },
+          "50%": { transform: "scale(1.06)" },
+        },
       },
       animation: {
         "fade-up": "fade-up 240ms ease-out both",
+        "slide-in": "slide-in 320ms cubic-bezier(0.22, 1, 0.36, 1) both",
+        "slide-out": "slide-out 200ms ease-in both",
+        pop: "pop 420ms cubic-bezier(0.22, 1, 0.36, 1) both",
+        "pulse-urgent": "pulse-urgent 1s ease-in-out infinite",
       },
     },
   },

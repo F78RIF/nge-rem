@@ -7,18 +7,21 @@ import { cn } from "@/lib/utils";
 export function TimerRing({
   remaining,
   total,
+  progress,
   size = 72,
   className,
 }: {
   remaining: number;
   total: number;
+  /** Rasio sisa 0–1 yang diperbarui tiap frame. Bila diisi, cincin bergerak mulus tanpa transisi CSS. */
+  progress?: number;
   size?: number;
   className?: string;
 }) {
   const stroke = 6;
   const r = (size - stroke) / 2;
   const circumference = 2 * Math.PI * r;
-  const ratio = total > 0 ? Math.max(0, Math.min(1, remaining / total)) : 0;
+  const ratio = Math.max(0, Math.min(1, progress ?? (total > 0 ? remaining / total : 0)));
   const urgent = remaining <= 3;
 
   return (
@@ -40,7 +43,7 @@ export function TimerRing({
           strokeDasharray={circumference}
           strokeDashoffset={circumference * (1 - ratio)}
           className={cn(
-            "transition-[stroke-dashoffset] duration-1000 ease-linear",
+            progress === undefined && "transition-[stroke-dashoffset] duration-1000 ease-linear",
             urgent ? "stroke-brand" : "stroke-safety",
           )}
         />
