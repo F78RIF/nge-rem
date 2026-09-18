@@ -1,0 +1,42 @@
+@import "tailwindcss";
+@config "../../tailwind.config.ts";
+
+:root {
+  color-scheme: light;
+}
+
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply bg-background text-charcoal font-sans text-body antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-display text-balance tracking-tight;
+  }
+
+  /* Visible focus ring untuk seluruh elemen interaktif (Bab 35). */
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-info;
+  }
+
+  ::selection {
+    @apply bg-safety-100 text-charcoal;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
