@@ -148,35 +148,38 @@ export function ScenarioScreen({
           return (
             // Animasi masuk di wrapper: fill-mode `both` pada tombol akan mengunci transform hover/scale.
             <div key={choice.id} className="animate-fade-up" style={{ animationDelay: `${120 + i * 60}ms` }}>
-            <button
-              type="button"
-              disabled={locked}
-              onPointerDown={markInteraction}
-              onFocus={markInteraction}
-              onClick={() => choose(choice.id)}
-              aria-pressed={isSelected}
-              aria-keyshortcuts={String(i + 1)}
-              className={cn(
-                "group flex min-h-14 w-full items-center gap-3 rounded-2xl border-2 bg-surface px-3.5 py-3 text-left font-semibold",
-                "transition-[transform,border-color,background-color,opacity] duration-150",
-                "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-info",
-                !locked && "border-border shadow-card hover:-translate-y-0.5 hover:border-brand/60 active:scale-[0.98]",
-                isSelected && "scale-[1.02] border-brand bg-brand-50",
-                locked && !isSelected && "border-border opacity-45",
-                "disabled:cursor-default",
-              )}
-            >
-              <span
-                aria-hidden
+              <button
+                type="button"
+                disabled={locked}
+                onPointerDown={markInteraction}
+                onFocus={markInteraction}
+                onClick={() => choose(choice.id)}
+                aria-pressed={isSelected}
+                aria-keyshortcuts={String(i + 1)}
                 className={cn(
-                  "flex size-9 shrink-0 items-center justify-center rounded-xl text-sm font-extrabold transition-colors",
-                  isSelected ? "bg-brand text-white" : "bg-background text-charcoal group-hover:bg-brand-50 group-hover:text-brand",
+                  "group flex min-h-14 w-full items-center gap-3 rounded-2xl border-2 bg-surface px-3.5 py-3 text-left font-semibold",
+                  "transition-[transform,border-color,background-color,opacity] duration-150",
+                  "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-info",
+                  !locked &&
+                    "border-border shadow-card hover:-translate-y-0.5 hover:border-brand/60 active:scale-[0.98]",
+                  isSelected && "scale-[1.02] border-brand bg-brand-50",
+                  locked && !isSelected && "border-border opacity-45",
+                  "disabled:cursor-default",
                 )}
               >
-                {LETTERS[i]}
-              </span>
-              <span className="flex-1 leading-snug">{choice.text}</span>
-            </button>
+                <span
+                  aria-hidden
+                  className={cn(
+                    "flex size-9 shrink-0 items-center justify-center rounded-xl text-sm font-extrabold transition-colors",
+                    isSelected
+                      ? "bg-brand text-white"
+                      : "bg-background text-charcoal group-hover:bg-brand-50 group-hover:text-brand",
+                  )}
+                >
+                  {LETTERS[i]}
+                </span>
+                <span className="flex-1 leading-snug">{choice.text}</span>
+              </button>
             </div>
           );
         })}

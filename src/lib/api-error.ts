@@ -1,12 +1,7 @@
 import { NextResponse } from "next/server";
 
 export type ApiErrorCode =
-  | "VALIDATION_ERROR"
-  | "NOT_FOUND"
-  | "FORBIDDEN"
-  | "CONFLICT"
-  | "UNAVAILABLE"
-  | "INTERNAL_ERROR";
+  "VALIDATION_ERROR" | "NOT_FOUND" | "FORBIDDEN" | "CONFLICT" | "UNAVAILABLE" | "INTERNAL_ERROR";
 
 const STATUS: Record<ApiErrorCode, number> = {
   VALIDATION_ERROR: 422,

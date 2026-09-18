@@ -5,12 +5,7 @@ import Link from "next/link";
 import { Clock, ListChecks, ShieldCheck, SmartphoneNfc, X } from "lucide-react";
 import { Alert, Button, Logo, Progress } from "@/components/ui";
 import { enqueueResponse, flushResponses, pendingFor } from "@/features/assessment/response-queue";
-import type {
-  AssessmentSet,
-  ResponsePayload,
-  ScenarioChoice,
-  ScenarioOutcome,
-} from "@/features/assessment/types";
+import type { AssessmentSet, ResponsePayload, ScenarioChoice, ScenarioOutcome } from "@/features/assessment/types";
 import { cn } from "@/lib/utils";
 import { uuidv4 } from "@/lib/uuid";
 import { AssessmentSummary, type CompletionState } from "./assessment-summary";
@@ -223,7 +218,7 @@ export function AssessmentGame({ set }: { set: AssessmentSet }) {
               </span>
             </span>
           ) : (
-            <Logo tagline={false} className="[&>span]:text-xl" />
+            <Logo tagline={false} />
           )}
           <Link
             href="/"
@@ -345,10 +340,21 @@ function Intro({
         </span>
       </Alert>
 
-      {error && <Alert tone="danger" title="Belum bisa memulai">{error}</Alert>}
+      {error && (
+        <Alert tone="danger" title="Belum bisa memulai">
+          {error}
+        </Alert>
+      )}
 
       <div className="mt-auto pb-2">
-        <Button size="lg" fullWidth loading={starting} loadingText="Menyiapkan…" error={Boolean(error)} onClick={onStart}>
+        <Button
+          size="lg"
+          fullWidth
+          loading={starting}
+          loadingText="Menyiapkan…"
+          error={Boolean(error)}
+          onClick={onStart}
+        >
           {error ? "Coba lagi" : "Mulai Sekarang"}
         </Button>
       </div>

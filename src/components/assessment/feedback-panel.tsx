@@ -46,7 +46,9 @@ export function FeedbackPanel({
     <div className="flex flex-1 flex-col gap-4">
       {/* Status */}
       <div className={cn("flex flex-col items-center gap-3 rounded-card border-2 px-5 py-6 text-center", meta.soft)}>
-        <span className={cn("flex size-16 animate-pop items-center justify-center rounded-full shadow-raised", meta.badge)}>
+        <span
+          className={cn("flex size-16 animate-pop items-center justify-center rounded-full shadow-raised", meta.badge)}
+        >
           <Icon className="size-9" strokeWidth={2.25} aria-hidden />
         </span>
         <span className={cn("rounded-pill px-3 py-1 text-caption font-extrabold uppercase tracking-wider", meta.badge)}>
@@ -67,9 +69,7 @@ export function FeedbackPanel({
             </p>
           )}
         </div>
-        <p className="mt-1 font-semibold">
-          {choice ? choice.text : "Kamu belum memilih sampai waktu habis."}
-        </p>
+        <p className="mt-1 font-semibold">{choice ? choice.text : "Kamu belum memilih sampai waktu habis."}</p>
 
         <div className="mt-3 flex flex-col gap-2 border-t border-border pt-3">
           {choice ? (
@@ -85,8 +85,8 @@ export function FeedbackPanel({
             </>
           ) : (
             <p className="text-charcoal-muted">
-              Tidak apa-apa, ini latihan. Di jalan, ragu terlalu lama juga bisa berisiko — makanya berguna
-              punya keputusan aman yang sudah &ldquo;siap pakai&rdquo; sebelum situasinya terjadi.
+              Tidak apa-apa, ini latihan. Di jalan, ragu terlalu lama juga bisa berisiko — makanya berguna punya
+              keputusan aman yang sudah &ldquo;siap pakai&rdquo; sebelum situasinya terjadi.
             </p>
           )}
         </div>
@@ -110,7 +110,10 @@ export function FeedbackPanel({
       {/* Micro-nudge sebagai sticky note (aksen tulisan tangan, Bab 34.3) */}
       {item.microNudge && (
         <aside className="relative -rotate-1 rounded-lg bg-safety-100 px-4 pb-3 pt-4 shadow-card">
-          <span aria-hidden className="absolute -top-2 left-1/2 h-4 w-14 -translate-x-1/2 rotate-2 rounded-sm bg-safety/60" />
+          <span
+            aria-hidden
+            className="absolute -top-2 left-1/2 h-4 w-14 -translate-x-1/2 rotate-2 rounded-sm bg-safety/60"
+          />
           <p className="flex items-center gap-1.5 text-caption font-bold uppercase tracking-wide text-charcoal">
             <Lightbulb className="size-4" aria-hidden />
             Ingat ini

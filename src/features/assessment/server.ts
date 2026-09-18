@@ -35,7 +35,6 @@ type VersionRow = {
   time_limit_sec: number;
   randomize_choices: boolean;
   micro_nudge: string | null;
-  status: string;
   choices: ChoiceRow[];
 };
 
@@ -61,7 +60,7 @@ const SET_SELECT = `
     position,
     scenario_versions (
       id, title, context, media_url, media_alt, dimension_weights, time_limit_sec,
-      randomize_choices, micro_nudge, status,
+      randomize_choices, micro_nudge,
       choices ( id, position, text, safety_label, feedback_short, feedback_long, legal_reference )
     )
   )`;
@@ -123,7 +122,9 @@ async function answeredOutcomes(attemptId: string): Promise<ScenarioOutcome[]> {
     .from("scenario_responses")
     .select("scenario_version_id, choice_id, timed_out, response_ms")
     .eq("attempt_id", attemptId)
-    .returns<{ scenario_version_id: string; choice_id: string | null; timed_out: boolean; response_ms: number | null }[]>();
+    .returns<
+      { scenario_version_id: string; choice_id: string | null; timed_out: boolean; response_ms: number | null }[]
+    >();
   if (error) throw error;
   return (data ?? []).map((r) => ({
     versionId: r.scenario_version_id,
@@ -134,10 +135,7 @@ async function answeredOutcomes(attemptId: string): Promise<ScenarioOutcome[]> {
 }
 
 /** Bab 29.1 + 5.1 — lanjutkan attempt yang masih berjalan, atau buat baru. */
-export async function startAttempt(
-  slug: string,
-  identity: ParticipantIdentity,
-): Promise<Result<StartAttemptResult>> {
+export async function startAttempt(slug: string, identity: ParticipantIdentity): Promise<Result<StartAttemptResult>> {
   const set = await loadAssessmentSet(slug);
   if (!set.ok) return set;
   const db = createAdminClient();
@@ -273,7 +271,10 @@ export async function completeAttempt(
 
   const db = createAdminClient();
   const [{ count: total, error: totalErr }, { count: answered, error: answeredErr }] = await Promise.all([
-    db.from("assessment_set_items").select("id", { count: "exact", head: true }).eq("assessment_set_id", attempt.data.assessment_set_id),
+    db
+      .from("assessment_set_items")
+      .select("id", { count: "exact", head: true })
+      .eq("assessment_set_id", attempt.data.assessment_set_id),
     db.from("scenario_responses").select("id", { count: "exact", head: true }).eq("attempt_id", attemptId),
   ]);
   if (totalErr || answeredErr) {

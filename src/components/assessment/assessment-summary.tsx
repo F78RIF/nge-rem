@@ -34,9 +34,7 @@ export function AssessmentSummary({
   const count = (s: FeedbackStatus) => rows.filter((r) => r.status === s).length;
   const safe = count("safe");
   const answered = Object.values(outcomes).filter((o) => !o.timedOut);
-  const avgSec = answered.length
-    ? answered.reduce((sum, o) => sum + o.responseMs, 0) / answered.length / 1000
-    : null;
+  const avgSec = answered.length ? answered.reduce((sum, o) => sum + o.responseMs, 0) / answered.length / 1000 : null;
 
   const message =
     safe / Math.max(items.length, 1) >= 0.7
@@ -80,7 +78,10 @@ export function AssessmentSummary({
         </p>
       )}
 
-      <section aria-label="Rincian per situasi" className="rounded-card border border-border bg-surface p-2 shadow-card">
+      <section
+        aria-label="Rincian per situasi"
+        className="rounded-card border border-border bg-surface p-2 shadow-card"
+      >
         <ol className="divide-y divide-border">
           {rows.map(({ item, status }, i) => {
             const meta = FEEDBACK_STATUS[status];
@@ -89,7 +90,12 @@ export function AssessmentSummary({
               <li key={item.versionId} className="flex items-center gap-3 px-2 py-2.5">
                 <span className="w-5 text-right text-caption font-bold tabular-nums text-charcoal-muted">{i + 1}</span>
                 <span className="flex-1 font-medium">{item.title}</span>
-                <span className={cn("inline-flex items-center gap-1 rounded-pill px-2 py-0.5 text-caption font-bold", meta.badge)}>
+                <span
+                  className={cn(
+                    "inline-flex items-center gap-1 rounded-pill px-2 py-0.5 text-caption font-bold",
+                    meta.badge,
+                  )}
+                >
                   <Icon className="size-3.5" aria-hidden />
                   {meta.label}
                 </span>
@@ -102,8 +108,8 @@ export function AssessmentSummary({
       <SyncStatus completion={completion} onRetry={onRetrySync} />
 
       <p className="text-center text-caption text-charcoal-muted">
-        Profil Sidik Risiko per dimensi akan tersedia di tahap berikutnya. Hasil ini bukan diagnosis dan bukan
-        prediksi kecelakaan.
+        Profil Sidik Risiko per dimensi akan tersedia di tahap berikutnya. Hasil ini bukan diagnosis dan bukan prediksi
+        kecelakaan.
       </p>
 
       <div className="mt-auto flex flex-col gap-2.5 pb-4 sm:flex-row">
